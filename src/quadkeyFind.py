@@ -60,13 +60,11 @@ cityCoords['z18_quadkeys'] = cityCoords.apply(lambda x: generate_quadkeys(x['aeq
 cityCoords.dtypes
 
 cityCoords['z18_quadkeys'].astype('str').str.split(',') 
-
-for z18_quadkeys in cityCoords["z18_quadkeys"]:
-    print(z18_quadkeys)
+cityCoords.to_csv("AllCityQuadkeys.csv")
 
 quadkeyArray = cityCoords["z18_quadkeys"].values
 
-## take first 7 digits
+## take first 7 digits for get coarse quadkey
 def left(s, amount):
     return s[:amount]
 
@@ -75,3 +73,14 @@ for quadkey in quadkeyArray[0]:
     truncatedQuadkey.append(left(quadkey, 7))
 
 distinctQuadkey = set(truncatedQuadkey)
+
+## Select specific relevant quadkeys
+quadkeyList = quadkeyArray[0]
+quadkeyList
+
+# write full list of quadkeys to file
+with open(r'./data/quadkeyListToronto.txt', 'w') as fp:
+    for item in quadkeyList:
+        # write each item on a new line
+        fp.write("%s\n" % item)
+    print('Done')

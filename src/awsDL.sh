@@ -6,3 +6,5 @@ for days in {01..31};
     done; done; 
 
 
+
+tr "|" "," < 0302231_01-07.csv > test.csv
