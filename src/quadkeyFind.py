@@ -75,12 +75,22 @@ for quadkey in quadkeyArray[0]:
 distinctQuadkey = set(truncatedQuadkey)
 
 ## Select specific relevant quadkeys
-quadkeyList = quadkeyArray[0]
-quadkeyList
+quadkeyList = quadkeyArray[0] 
+dfquadkey = pd.DataFrame(quadkeyList, columns=["z18_quadkeys"])
+dfquadkey.info()
 
-# write full list of quadkeys to file
-with open(r'./data/quadkeyListToronto.txt', 'w') as fp:
-    for item in quadkeyList:
-        # write each item on a new line
-        fp.write("%s\n" % item)
-    print('Done')
+
+tempDf = pd.read_csv("./data/mapboxFiles/0302231_01-07.csv", sep="|")
+subsettedQuadkeys = pd.merge(dfquadkey["z18_quadkeys"].astype("int64"), tempDf,
+ left_on="z18_quadkeys",
+ right_on="geography",
+ how="left")
+
+fileList = []
+for file in fileList: 
+    df = pd.read_csv(file, sep="|")
+    subsettedQuadkeys = pd.merge(dfquadkey["z18_quadkeys"].astype("int64"), tempDf, 
+    left_on="z18_quadkeys",
+    right_on="geography",
+    how="left")
+
